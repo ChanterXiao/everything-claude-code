@@ -1,70 +1,37 @@
-# /learn - Extract Reusable Patterns
+---
+description: Extract reusable patterns from the session and save as skills.
+---
 
-Analyze the current session and extract any patterns worth saving as skills.
+# Learn Command
 
-## Trigger
+Analyze the current session and extract patterns worth saving as skills.
 
-Run `/learn` at any point during a session when you've solved a non-trivial problem.
+## Instructions
 
-## What to Extract
+1. **Review Session** - Look for extractable patterns:
+   - Error resolution patterns (error + root cause + fix)
+   - Debugging techniques (non-obvious steps, tool combinations)
+   - Workarounds (library quirks, API limitations)
+   - Project-specific patterns (conventions, architecture decisions)
 
-Look for:
+2. **Identify Most Valuable** - Select the most reusable insight
 
-1. **Error Resolution Patterns**
-   - What error occurred?
-   - What was the root cause?
-   - What fixed it?
-   - Is this reusable for similar errors?
+3. **Draft Skill File** using this format:
+   ```markdown
+   # [Pattern Name]
+   **Extracted:** [Date]
+   **Context:** [When this applies]
 
-2. **Debugging Techniques**
-   - Non-obvious debugging steps
-   - Tool combinations that worked
-   - Diagnostic patterns
+   ## Problem
+   [What problem this solves]
 
-3. **Workarounds**
-   - Library quirks
-   - API limitations
-   - Version-specific fixes
+   ## Solution
+   [The pattern/technique]
 
-4. **Project-Specific Patterns**
-   - Codebase conventions discovered
-   - Architecture decisions made
-   - Integration patterns
+   ## When to Use
+   [Trigger conditions]
+   ```
 
-## Output Format
+4. **Ask User Confirmation** before saving to `~/.claude/skills/learned/`
 
-Create a skill file at `~/.claude/skills/learned/[pattern-name].md`:
-
-```markdown
-# [Descriptive Pattern Name]
-
-**Extracted:** [Date]
-**Context:** [Brief description of when this applies]
-
-## Problem
-[What problem this solves - be specific]
-
-## Solution
-[The pattern/technique/workaround]
-
-## Example
-[Code example if applicable]
-
-## When to Use
-[Trigger conditions - what should activate this skill]
-```
-
-## Process
-
-1. Review the session for extractable patterns
-2. Identify the most valuable/reusable insight
-3. Draft the skill file
-4. Ask user to confirm before saving
-5. Save to `~/.claude/skills/learned/`
-
-## Notes
-
-- Don't extract trivial fixes (typos, simple syntax errors)
-- Don't extract one-time issues (specific API outages, etc.)
-- Focus on patterns that will save time in future sessions
-- Keep skills focused - one pattern per skill
+**Notes**: Don't extract trivial fixes (typos) or one-time issues. Focus on reusable patterns.

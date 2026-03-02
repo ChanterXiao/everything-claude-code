@@ -1,19 +1,18 @@
 ---
-description: Start the NanoClaw agent REPL — a persistent, session-aware AI assistant powered by the claude CLI.
+description: Start the NanoClaw agent REPL — a persistent, session-aware AI assistant.
 ---
 
 # Claw Command
 
-Start an interactive AI agent session that persists conversation history to disk and optionally loads ECC skill context.
+Start an interactive AI agent session with persistent history.
 
-## Usage
+## Execution
 
 ```bash
 node scripts/claw.js
 ```
 
 Or via npm:
-
 ```bash
 npm run claw
 ```
@@ -22,12 +21,18 @@ npm run claw
 
 | Variable | Default | Description |
 |----------|---------|-------------|
-| `CLAW_SESSION` | `default` | Session name (alphanumeric + hyphens) |
-| `CLAW_SKILLS` | *(empty)* | Comma-separated skill names to load as system context |
+| `CLAW_SESSION` | `default` | Session name |
+| `CLAW_SKILLS` | *(empty)* | Comma-separated skill names to load |
+
+## How It Works
+
+1. Reads `CLAW_SESSION` to select named session (default: `default`)
+2. Loads conversation history from `~/.claude/claw/{session}.md`
+3. Optionally loads ECC skill context from `CLAW_SKILLS`
+4. Enters blocking prompt loop - each message sent to `claude -p` with history
+5. Responses appended to session file for persistence
 
 ## REPL Commands
-
-Inside the REPL, type these commands directly at the prompt:
 
 ```
 /clear      Clear current session history
@@ -37,33 +42,11 @@ Inside the REPL, type these commands directly at the prompt:
 exit        Quit the REPL
 ```
 
-## How It Works
-
-1. Reads `CLAW_SESSION` env var to select a named session (default: `default`)
-2. Loads conversation history from `~/.claude/claw/{session}.md`
-3. Optionally loads ECC skill context from `CLAW_SKILLS` env var
-4. Enters a blocking prompt loop — each user message is sent to `claude -p` with full history
-5. Responses are appended to the session file for persistence across restarts
-
 ## Session Storage
 
-Sessions are stored as Markdown files in `~/.claude/claw/`:
-
-```
-~/.claude/claw/default.md
-~/.claude/claw/my-project.md
-```
-
-Each turn is formatted as:
-
-```markdown
-### [2025-01-15T10:30:00.000Z] User
-What does this function do?
----
-### [2025-01-15T10:30:05.000Z] Assistant
-This function calculates...
----
-```
+Sessions stored as Markdown in `~/.claude/claw/`:
+- `~/.claude/claw/default.md`
+- `~/.claude/claw/my-project.md`
 
 ## Examples
 

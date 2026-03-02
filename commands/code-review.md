@@ -1,40 +1,29 @@
-# Code Review
+---
+description: Comprehensive security and quality review of uncommitted changes. Invokes the code-reviewer agent.
+---
 
-Comprehensive security and quality review of uncommitted changes:
+# Code Review Command
 
-1. Get changed files: git diff --name-only HEAD
+@code-review Review the uncommitted changes for security and quality issues:
 
-2. For each changed file, check for:
+## Instructions
 
-**Security Issues (CRITICAL):**
-- Hardcoded credentials, API keys, tokens
-- SQL injection vulnerabilities
-- XSS vulnerabilities  
-- Missing input validation
-- Insecure dependencies
-- Path traversal risks
+1. **Get Changed Files** - Run `git diff --name-only HEAD` to find modified files
+2. **Security Review** - Check for:
+   - Hardcoded credentials, API keys, tokens
+   - SQL injection vulnerabilities
+   - XSS vulnerabilities
+   - Missing input validation
+   - Insecure dependencies
+   - Path traversal risks
+3. **Quality Review** - Check for:
+   - Functions > 50 lines
+   - Files > 800 lines
+   - Nesting depth > 4 levels
+   - Duplicate code
+   - Missing error handling
+   - Poor naming
+4. **Generate Report** - Categorize issues by severity (CRITICAL/HIGH/MEDIUM/LOW)
+5. **Suggest Fixes** - Provide specific recommendations
 
-**Code Quality (HIGH):**
-- Functions > 50 lines
-- Files > 800 lines
-- Nesting depth > 4 levels
-- Missing error handling
-- console.log statements
-- TODO/FIXME comments
-- Missing JSDoc for public APIs
-
-**Best Practices (MEDIUM):**
-- Mutation patterns (use immutable instead)
-- Emoji usage in code/comments
-- Missing tests for new code
-- Accessibility issues (a11y)
-
-3. Generate report with:
-   - Severity: CRITICAL, HIGH, MEDIUM, LOW
-   - File location and line numbers
-   - Issue description
-   - Suggested fix
-
-4. Block commit if CRITICAL or HIGH issues found
-
-Never approve code with security vulnerabilities!
+Focus on uncommitted changes only. Be thorough but constructive.
